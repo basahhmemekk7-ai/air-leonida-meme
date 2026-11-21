@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>AIR LEONIDA — Boarding Pass</title>
+<title>AIR LEONIDA — Boarding Pass v2</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 1080px; height: 1080px; }
@@ -17,12 +17,13 @@
 
   .ticket {
     position: relative;
-    width: 1000px; height: 1024px;
+    width: 1000px; height: 1040px;
     background: #fffaf1;
     border-radius: 26px;
     box-shadow: 0 24px 60px rgba(0, 0, 0, .55);
-    padding: 30px 44px 0 44px;
+    padding: 20px 44px 0 44px;
     overflow: hidden;
+    display: flex; flex-direction: column;
   }
   .ticket::before { /* top magenta edge */
     content: ""; position: absolute; top: 0; left: 0; right: 0; height: 14px;
@@ -30,110 +31,136 @@
   }
 
   /* ---------- header ---------- */
-  .header { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
+  .header { margin-top: 4px; }
   .eyebrow {
     font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 24px; letter-spacing: 6px; color: #c41c83;
+    font-size: 20px; letter-spacing: 4px; color: #c41c83;
   }
   h1 {
     font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 84px; line-height: 1; letter-spacing: -1px; color: #101c2e;
-    margin-top: 4px;
+    font-size: 58px; line-height: 1.05; letter-spacing: -1px; color: #101c2e;
+    margin-top: 2px;
   }
-  .subtitle {
-    font-size: 23px; font-weight: 700; color: #5a5359; margin-top: 8px; letter-spacing: 1px;
-  }
-  .passenger { margin-top: 30px; }
-  .passenger .label { font-size: 18px; font-weight: 700; letter-spacing: 3px; color: #8a8387; }
+  .passenger { margin-top: 8px; }
+  .passenger .label { font-size: 15px; font-weight: 700; letter-spacing: 3px; color: #8a8387; }
   .passenger .value {
     font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 34px; color: #101c2e; margin-top: 2px;
+    font-size: 27px; color: #101c2e; margin-top: 1px;
   }
-
-  /* ---------- captain portrait ---------- */
-  .captain {
-    flex: 0 0 auto; width: 256px; text-align: center;
-    border: 3px solid #101c2e; border-radius: 16px; padding: 8px 8px 6px;
-    background: #fff; margin-top: 2px;
-  }
-  .captain .portrait { position: relative; width: 216px; height: 216px; margin: 0 auto; }
-  .captain img { width: 216px; height: 216px; display: block; }
-  .captain .cap { position: absolute; left: 50%; top: 13px; transform: translateX(-56%); width: 136px; height: 68px; }
-  .captain .role {
-    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 22px; letter-spacing: 3px; color: #101c2e; margin-top: 4px;
-  }
-  .captain .wings { margin-top: 2px; }
+  .passenger .value .with { color: #c41c83; }
 
   /* ---------- route band ---------- */
   .route {
-    margin-top: 20px; background: #c41c83; border-radius: 14px;
+    margin-top: 8px; background: #c41c83; border-radius: 14px;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 30px; color: #fff;
+    padding: 9px 28px; color: #fff;
   }
-  .route .city { font-family: "Noto Sans Display", sans-serif; font-weight: 900; font-size: 42px; line-height: 1; }
-  .route .city small { display: block; font-size: 19px; font-weight: 700; letter-spacing: 3px; opacity: .85; margin-top: 4px; }
-  .route .plane { font-size: 46px; line-height: 1; }
+  .route .city { font-family: "Noto Sans Display", sans-serif; font-weight: 900; font-size: 36px; line-height: 1; }
+  .route .city small { display: block; font-size: 16px; font-weight: 700; letter-spacing: 2px; opacity: .88; margin-top: 4px; }
+  .route .plane { font-size: 40px; line-height: 1; }
   .route .flight {
     text-align: right; font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 36px; line-height: 1;
+    font-size: 32px; line-height: 1;
   }
-  .route .flight small { display: block; font-size: 19px; font-weight: 700; letter-spacing: 3px; opacity: .85; margin-top: 4px; }
+  .route .flight small { display: block; font-size: 16px; font-weight: 700; letter-spacing: 2px; opacity: .88; margin-top: 4px; }
 
-  /* ---------- fields grid ---------- */
-  .grid {
-    margin-top: 24px;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 16px 48px;
-  }
-  .field .label {
-    font-size: 18px; font-weight: 700; letter-spacing: 3px; color: #8a8387;
-  }
-  .field .value {
+  /* ---------- middle: fare + flight details ---------- */
+  .middle { margin-top: 8px; display: flex; gap: 36px; }
+  .fare { width: 540px; flex: 0 0 auto; }
+  .fare h2, .details h2 {
     font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 35px; line-height: 1.1; color: #101c2e; margin-top: 2px;
+    font-size: 20px; letter-spacing: 3px; color: #101c2e;
+    border-bottom: 3px solid #101c2e; padding-bottom: 5px; margin-bottom: 8px;
   }
-  .field .value .hot { color: #c41c83; }
-
-  /* ---------- perforation ---------- */
-  .perf { position: relative; margin-top: 22px; border-top: 3px dashed #c9c2c5; }
-  .perf::before, .perf::after {
-    content: ""; position: absolute; top: -19px; width: 36px; height: 36px;
-    background: #0c1626; border-radius: 50%;
+  .fare .row {
+    display: flex; align-items: baseline;
+    font-size: 19px; font-weight: 700; color: #33302f; line-height: 1.3;
+    margin-bottom: 4px;
   }
-  .perf::before { left: -62px; }
-  .perf::after { right: -62px; }
+  .fare .row .dots { flex: 1; border-bottom: 2px dotted #b9b0b4; margin: 0 8px; min-width: 12px; }
+  .fare .row .price { font-family: "Noto Sans Display", sans-serif; font-weight: 900; color: #101c2e; white-space: nowrap; }
+  .fare .row.total {
+    border-top: 3px solid #101c2e; margin-top: 8px; padding-top: 4px;
+    font-size: 22px;
+  }
+  .fare .row.total .price { color: #c41c83; font-size: 24px; }
 
-  /* ---------- bottom row: barcode + stamp ---------- */
-  .bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 20px; }
+  .details { flex: 1; }
+  .details .row {
+    display: flex; align-items: baseline;
+    margin-bottom: 4px; line-height: 1.3;
+  }
+  .details .row .label {
+    font-size: 15px; font-weight: 700; letter-spacing: 2px; color: #8a8387; white-space: nowrap;
+  }
+  .details .row .dots { flex: 1; border-bottom: 2px dotted #b9b0b4; margin: 0 8px; min-width: 8px; }
+  .details .row .value {
+    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
+    font-size: 22px; color: #101c2e; white-space: nowrap;
+  }
+  .details .row .value.hot { color: #c41c83; }
+
+  /* ---------- oxygen line ---------- */
+  .oxygen {
+    margin-top: 10px;
+    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
+    font-size: 22px; color: #101c2e;
+    background: #fdeef6; border-left: 6px solid #c41c83; border-radius: 8px;
+    padding: 6px 14px;
+  }
+  .oxygen .hot { color: #c41c83; }
+
+  /* ---------- bottom: captain + barcode + stamp ---------- */
+  .bottom {
+    margin-top: 10px; padding-top: 8px;
+    border-top: 3px dashed #c9c2c5;
+    display: flex; align-items: flex-start; gap: 24px;
+  }
+  .captain { width: 300px; flex: 0 0 auto; text-align: center; }
+  .captain .portrait { position: relative; width: 250px; height: 250px; margin: 0 auto; }
+  .captain img { width: 250px; height: 250px; display: block; }
+  .captain .cap { position: absolute; left: 50%; top: 16px; transform: translateX(-56%); width: 158px; height: 79px; }
+  .captain .quote {
+    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
+    font-size: 18px; line-height: 1.25; color: #101c2e; margin-top: 6px;
+  }
+  .captain .quote .who { color: #c41c83; }
+
+  .bottom-right { flex: 1; padding-top: 6px; }
   .barcode-box { text-align: left; }
-  #bars { display: flex; align-items: stretch; height: 66px; gap: 0; }
+  #bars { display: flex; align-items: stretch; height: 62px; gap: 0; }
   #bars i { display: block; background: #101c2e; }
   .barcode-num {
-    font-family: "Noto Sans Mono", monospace; font-size: 24px; font-weight: 700;
+    font-family: "Noto Sans Mono", monospace; font-size: 22px; font-weight: 700;
     letter-spacing: 4px; color: #101c2e; margin-top: 6px;
   }
-
   .stamp {
-    width: 430px; text-align: center; color: #c41c83;
-    border: 4px solid #c41c83; border-radius: 12px; padding: 12px 14px;
-    transform: rotate(-4deg);
-    outline: 2px solid #c41c83; outline-offset: 5px;
-  }
-  .stamp .s1 {
+    margin: 34px auto 0; width: 470px; text-align: center; color: #d21f2b;
+    border: 5px solid #d21f2b; border-radius: 12px; padding: 12px 10px;
+    transform: rotate(-8deg);
+    outline: 2px solid #d21f2b; outline-offset: 5px;
     font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 27px; line-height: 1.15; letter-spacing: .5px;
-  }
-  .stamp .s2 {
-    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 21px; line-height: 1.2; margin-top: 4px; letter-spacing: .5px;
+    font-size: 36px; letter-spacing: 2px; line-height: 1.1;
   }
 
-  /* ---------- kicker footer ---------- */
+  /* ---------- footers ---------- */
+  .pitch {
+    margin-top: auto; margin-left: -44px; margin-right: -44px;
+    background: #c41c83; color: #fff;
+    padding: 10px 44px 11px;
+    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
+    font-size: 23px; line-height: 1.35;
+  }
+  .pitch .pill {
+    display: inline-block; background: #fff; color: #c41c83;
+    border-radius: 999px; padding: 1px 18px 2px; margin: 0 4px;
+    font-size: 25px;
+  }
   .kicker {
-    position: absolute; left: 0; right: 0; bottom: 0;
+    margin-left: -44px; margin-right: -44px;
     background: #101c2e; color: #fff; text-align: center;
     font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 26px; letter-spacing: .5px; padding: 17px 20px 19px;
+    font-size: 23px; letter-spacing: .5px; padding: 11px 20px 12px;
     white-space: nowrap;
   }
   .kicker b { color: #ff88c4; }
@@ -142,15 +169,46 @@
 <body>
   <div class="ticket">
     <div class="header">
-      <div>
-        <div class="eyebrow">✈ BOARDING PASS</div>
-        <h1>AIR LEONIDA</h1>
-        <div class="subtitle">VICE CITY &nbsp;·&nbsp; EST. 2013 &nbsp;·&nbsp; FINALLY BOARDING</div>
-        <div class="passenger">
-          <div class="label">PASSENGER</div>
-          <div class="value">ONE PATIENT GAMER</div>
-        </div>
+      <div class="eyebrow">✈ BOARDING PASS &nbsp;·&nbsp; VICE CITY &nbsp;·&nbsp; EST. 2013 &nbsp;·&nbsp; FINALLY BOARDING</div>
+      <h1>AIR LEONIDA</h1>
+      <div class="passenger">
+        <div class="label">PASSENGER</div>
+        <div class="value">ONE PATIENT GAMER <span class="with">· WITH JASON &amp; LUCIA</span></div>
       </div>
+    </div>
+
+    <div class="route">
+      <div class="city">LOS SANTOS<small>DEPARTED 17 SEP 2013</small></div>
+      <div class="plane">✈</div>
+      <div class="city">VICE CITY<small>ARRIVING 19 NOV 2026</small></div>
+      <div class="flight">GTA VI<small>FLIGHT</small></div>
+    </div>
+
+    <div class="middle">
+      <div class="fare">
+        <h2>FARE BREAKDOWN</h2>
+        <div class="row"><span>BASE FARE — GTA VI, STANDARD</span><span class="dots"></span><span class="price">$79.99</span></div>
+        <div class="row"><span>WAIT FEE — 13 YEARS IN THE LOUNGE</span><span class="dots"></span><span class="price">$0.00</span></div>
+        <div class="row"><span>DELAY FEE ×2 — FALL 2025 + MAY 2026</span><span class="dots"></span><span class="price">$0.00</span></div>
+        <div class="row"><span>BAGGAGE — 214 GB, SSD SOLD SEPARATELY</span><span class="dots"></span><span class="price">$0.00</span></div>
+        <div class="row"><span>SICK DAYS — 5, DOCTOR APPROVED</span><span class="dots"></span><span class="price">$0.00</span></div>
+        <div class="row"><span>TRAILER 2 — WATCHED 87 TIMES</span><span class="dots"></span><span class="price">$0.00</span></div>
+        <div class="row total"><span>TOTAL DUE</span><span class="dots"></span><span class="price">$79.99</span></div>
+      </div>
+      <div class="details">
+        <h2>FLIGHT DETAILS</h2>
+        <div class="row"><span class="label">DEPARTURE</span><span class="dots"></span><span class="value hot">DELAYED ×2</span></div>
+        <div class="row"><span class="label">GATE</span><span class="dots"></span><span class="value">CLOSED 13 YEARS</span></div>
+        <div class="row"><span class="label">SEAT</span><span class="dots"></span><span class="value">COUCH</span></div>
+        <div class="row"><span class="label">BAGGAGE</span><span class="dots"></span><span class="value">214 GB</span></div>
+        <div class="row"><span class="label">FLIGHT TIME</span><span class="dots"></span><span class="value">13 YEARS</span></div>
+        <div class="row"><span class="label">DAYS IN THE AIR</span><span class="dots"></span><span class="value">4,811 DAYS</span></div>
+      </div>
+    </div>
+
+    <div class="oxygen">⚠ <span class="hot">OXYGEN MASKS:</span> NOT NEEDED — HELD OUR BREATH 13 YEARS</div>
+
+    <div class="bottom">
       <div class="captain">
         <div class="portrait">
           <img src="ghost.png" alt="make.fun ghost, your captain">
@@ -162,52 +220,21 @@
             <path d="M64 14 L67 21 L74 22 L69 27 L71 34 L64 30 L57 34 L59 27 L54 22 L61 21 Z" fill="#d4a017"/>
           </svg>
         </div>
-        <div class="role">YOUR CAPTAIN</div>
-        <div class="wings">
-          <svg width="120" height="26" viewBox="0 0 120 26" aria-hidden="true">
-            <g fill="#c41c83">
-              <path d="M58 4 L62 10 L68 11 L63 15 L65 21 L60 18 L55 21 L57 15 L52 11 L58 10 Z"/>
-              <rect x="2" y="9" width="44" height="5" rx="2.5"/>
-              <rect x="8" y="16" width="36" height="5" rx="2.5"/>
-              <rect x="74" y="9" width="44" height="5" rx="2.5"/>
-              <rect x="76" y="16" width="36" height="5" rx="2.5"/>
-            </g>
-          </svg>
+        <div class="quote"><span class="who">YOUR CAPTAIN:</span><br>“SORRY FOR THE DELAY. TWICE.”</div>
+      </div>
+      <div class="bottom-right">
+        <div class="barcode-box">
+          <div id="bars"></div>
+          <div class="barcode-num">VI-2013 · 19 NOV 2026</div>
         </div>
+        <div class="stamp">CLEARED FOR TAKEOFF</div>
       </div>
     </div>
 
-    <div class="route">
-      <div class="city">GTA V<small>DEPARTED 2013</small></div>
-      <div class="plane">✈</div>
-      <div class="city">LEONIDA<small>ARRIVING 2026</small></div>
-      <div class="flight">GTA VI<small>FLIGHT</small></div>
+    <div class="pitch">
+      PAID IN FULL BY MY AI AGENT —<br>
+      IT EARNED REAL MONEY ON <span class="pill">make.fun</span> WHILE WE WAITED
     </div>
-
-    <div class="grid">
-      <div class="field"><div class="label">DEPARTURE</div><div class="value"><span class="hot">DELAYED ×2</span></div></div>
-      <div class="field"><div class="label">GATE</div><div class="value">CLOSED 13 YEARS</div></div>
-      <div class="field"><div class="label">SEAT</div><div class="value">COUCH</div></div>
-      <div class="field"><div class="label">BAGGAGE</div><div class="value">214 GB</div></div>
-      <div class="field"><div class="label">BOARDING GROUP</div><div class="value">EVERYONE</div></div>
-      <div class="field"><div class="label">FLIGHT TIME</div><div class="value">13 YEARS</div></div>
-      <div class="field"><div class="label">IN-FLIGHT ENTERTAINMENT</div><div class="value">TRAILER 2, 87 TIMES</div></div>
-      <div class="field"><div class="label">DAYS IN THE AIR</div><div class="value">4,811 DAYS</div></div>
-    </div>
-
-    <div class="perf"></div>
-
-    <div class="bottom">
-      <div class="barcode-box">
-        <div id="bars"></div>
-        <div class="barcode-num">VI-2013 · 19 NOV 2026</div>
-      </div>
-      <div class="stamp">
-        <div class="s1">TICKET PAID BY MY AI AGENT ON MAKE.FUN</div>
-        <div class="s2">IT EARNED WHILE WE WAITED</div>
-      </div>
-    </div>
-
     <div class="kicker">THANK YOU FOR FLYING AIR LEONIDA. <b>YOUR PATIENCE HAS LANDED.</b></div>
   </div>
 
