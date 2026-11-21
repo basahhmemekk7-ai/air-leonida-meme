@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AIR LEONIDA — Boarding Pass</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1080px; }
+  body {
+    font-family: "Noto Sans", sans-serif;
+    background: #0c1626;
+    background-image:
+      radial-gradient(900px 500px at 85% -10%, rgba(196, 28, 131, .45), transparent 60%),
+      radial-gradient(700px 500px at -10% 110%, rgba(0, 150, 160, .35), transparent 60%);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .ticket {
+    position: relative;
+    width: 1000px; height: 1024px;
+    background: #fffaf1;
+    border-radius: 26px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .55);
+    padding: 30px 44px 0 44px;
+    overflow: hidden;
+  }
+  .ticket::before { /* top magenta edge */
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 14px;
+    background: #c41c83;
+  }
+
+  /* ---------- header ---------- */
+  .header { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
+  .eyebrow {
+    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
+    font-size: 24px; letter-spacing: 6px; color: #c41c83;
+  }
+  h1 {
+    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
+    font-size: 84px; line-height: 1; letter-spacing: -1px; color: #101c2e;
+    margin-top: 4px;
+  }
+  .subtitle {
+    font-size: 23px; font-weight: 700; color: #5a5359; margin-top: 8px; letter-spacing: 1px;
+  }
+  .passenger { margin-top: 30px; }
+  .passenger .label { font-size: 18px; font-weight: 700; letter-spacing: 3px; color: #8a8387; }
+  .passenger .value {
+    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
+    font-size: 34px; color: #101c2e; margin-top: 2px;
+  }
+
+  /* ---------- captain portrait ---------- */
+  .captain {
+    flex: 0 0 auto; width: 256px; text-align: center;
+    border: 3px solid #101c2e; border-radius: 16px; padding: 8px 8px 6px;
+    background: #fff; margin-top: 2px;
+  }
+  .captain .portrait { position: relative; width: 216px; height: 216px; margin: 0 auto; }
+  .captain img { width: 216px; height: 216px; display: block; }
+  .captain .cap { position: absolute; left: 50%; top: 13px; transform: translateX(-56%); width: 136px; height: 68px; }
+  .captain .role {
+    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
+    font-size: 22px; letter-spacing: 3px; color: #101c2e; margin-top: 4px;
+  }
+  .captain .wings { margin-top: 2px; }
+
+  /* ---------- route band ---------- */
+  .route {
+    margin-top: 20px; background: #c41c83; border-radius: 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 30px; color: #fff;
+  }
+  .route .city { font-family: "Noto Sans Display", sans-serif; font-weight: 900; font-size: 42px; line-height: 1; }
+  .route .city small { display: block; font-size: 19px; font-weight: 700; letter-spacing: 3px; opacity: .85; margin-top: 4px; }
+  .route .plane { font-size: 46px; line-height: 1; }
+  .route .flight {
+    text-align: right; font-family: "Noto Sans Display", sans-serif; font-weight: 900;
+    font-size: 36px; line-height: 1;
+  }
+  .route .flight small { display: block; font-size: 19px; font-weight: 700; letter-spacing: 3px; opacity: .85; margin-top: 4px; }
+
+  /* ---------- fields grid ---------- */
+  .grid {
+    margin-top: 24px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px 48px;
+  }
+  .field .label {
+    font-size: 18px; font-weight: 700; letter-spacing: 3px; color: #8a8387;
+  }
+  .field .value {
+    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
+    font-size: 35px; line-height: 1.1; color: #101c2e; margin-top: 2px;
+  }
+  .field .value .hot { color: #c41c83; }
+
+  /* ---------- perforation ---------- */
+  .perf { position: relative; margin-top: 22px; border-top: 3px dashed #c9c2c5; }
+  .perf::before, .perf::after {
+    content: ""; position: absolute; top: -19px; width: 36px; height: 36px;
+    background: #0c1626; border-radius: 50%;
+  }
+  .perf::before { left: -62px; }
+  .perf::after { right: -62px; }
+
+  /* ---------- bottom row: barcode + stamp ---------- */
+  .bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 20px; }
+  .barcode-box { text-align: left; }
+  #bars { display: flex; align-items: stretch; height: 66px; gap: 0; }
+  #bars i { display: block; background: #101c2e; }
+  .barcode-num {
+    font-family: "Noto Sans Mono", monospace; font-size: 24px; font-weight: 700;
+    letter-spacing: 4px; color: #101c2e; margin-top: 6px;
+  }
+
+  .stamp {
+    width: 430px; text-align: center; color: #c41c83;
+    border: 4px solid #c41c83; border-radius: 12px; padding: 12px 14px;
+    transform: rotate(-4deg);
+    outline: 2px solid #c41c83; outline-offset: 5px;
+  }
+  .stamp .s1 {
+    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
+    font-size: 27px; line-height: 1.15; letter-spacing: .5px;
+  }
+  .stamp .s2 {
+    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
+    font-size: 21px; line-height: 1.2; margin-top: 4px; letter-spacing: .5px;
+  }
+
+  /* ---------- kicker footer ---------- */
+  .kicker {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    background: #101c2e; color: #fff; text-align: center;
+    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
+    font-size: 26px; letter-spacing: .5px; padding: 17px 20px 19px;
+    white-space: nowrap;
+  }
+  .kicker b { color: #ff88c4; }
+</style>
+</head>
+<body>
+  <div class="ticket">
+    <div class="header">
+      <div>
+        <div class="eyebrow">✈ BOARDING PASS</div>
+        <h1>AIR LEONIDA</h1>
+        <div class="subtitle">VICE CITY &nbsp;·&nbsp; EST. 2013 &nbsp;·&nbsp; FINALLY BOARDING</div>
+        <div class="passenger">
+          <div class="label">PASSENGER</div>
+          <div class="value">ONE PATIENT GAMER</div>
+        </div>
+      </div>
+      <div class="captain">
+        <div class="portrait">
+          <img src="ghost.png" alt="make.fun ghost, your captain">
+          <svg class="cap" viewBox="0 0 128 64" aria-hidden="true">
+            <!-- pilot cap sitting on the ghost's head -->
+            <path d="M6 40 Q6 8 64 8 Q122 8 122 40 L122 44 L6 44 Z" fill="#101c2e" stroke="#0a1120" stroke-width="3"/>
+            <rect x="6" y="36" width="116" height="9" fill="#d4a017"/>
+            <ellipse cx="64" cy="48" rx="62" ry="10" fill="#101c2e" stroke="#0a1120" stroke-width="3"/>
+            <path d="M64 14 L67 21 L74 22 L69 27 L71 34 L64 30 L57 34 L59 27 L54 22 L61 21 Z" fill="#d4a017"/>
+          </svg>
+        </div>
+        <div class="role">YOUR CAPTAIN</div>
+        <div class="wings">
+          <svg width="120" height="26" viewBox="0 0 120 26" aria-hidden="true">
+            <g fill="#c41c83">
+              <path d="M58 4 L62 10 L68 11 L63 15 L65 21 L60 18 L55 21 L57 15 L52 11 L58 10 Z"/>
+              <rect x="2" y="9" width="44" height="5" rx="2.5"/>
+              <rect x="8" y="16" width="36" height="5" rx="2.5"/>
+              <rect x="74" y="9" width="44" height="5" rx="2.5"/>
+              <rect x="76" y="16" width="36" height="5" rx="2.5"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="route">
+      <div class="city">GTA V<small>DEPARTED 2013</small></div>
+      <div class="plane">✈</div>
+      <div class="city">LEONIDA<small>ARRIVING 2026</small></div>
+      <div class="flight">GTA VI<small>FLIGHT</small></div>
+    </div>
+
+    <div class="grid">
+      <div class="field"><div class="label">DEPARTURE</div><div class="value"><span class="hot">DELAYED ×2</span></div></div>
+      <div class="field"><div class="label">GATE</div><div class="value">CLOSED 13 YEARS</div></div>
+      <div class="field"><div class="label">SEAT</div><div class="value">COUCH</div></div>
+      <div class="field"><div class="label">BAGGAGE</div><div class="value">214 GB</div></div>
+      <div class="field"><div class="label">BOARDING GROUP</div><div class="value">EVERYONE</div></div>
+      <div class="field"><div class="label">FLIGHT TIME</div><div class="value">13 YEARS</div></div>
+      <div class="field"><div class="label">IN-FLIGHT ENTERTAINMENT</div><div class="value">TRAILER 2, 87 TIMES</div></div>
+      <div class="field"><div class="label">DAYS IN THE AIR</div><div class="value">4,811 DAYS</div></div>
+    </div>
+
+    <div class="perf"></div>
+
+    <div class="bottom">
+      <div class="barcode-box">
+        <div id="bars"></div>
+        <div class="barcode-num">VI-2013 · 19 NOV 2026</div>
+      </div>
+      <div class="stamp">
+        <div class="s1">TICKET PAID BY MY AI AGENT ON MAKE.FUN</div>
+        <div class="s2">IT EARNED WHILE WE WAITED</div>
+      </div>
+    </div>
+
+    <div class="kicker">THANK YOU FOR FLYING AIR LEONIDA. <b>YOUR PATIENCE HAS LANDED.</b></div>
+  </div>
+
+<script>
+  // Deterministic barcode bars (fixed pattern, no randomness).
+  var widths = [3,1,2,1,1,3,2,2,1,1,4,1,2,1,3,1,1,2,1,4,2,1,1,3,1,2,2,1,1,3,1,2,1,1,4,2,1,3,1,1,2,1,2,3,1,1,4,1,2,1,3,2,1,1,2,4,1,1,3,1,2,1];
+  var bars = document.getElementById('bars');
+  widths.forEach(function (w, i) {
+    var bar = document.createElement('i');
+    bar.style.width = (w * 3) + 'px';
+    if (i % 2 === 1) bar.style.background = 'transparent';
+    bars.appendChild(bar);
+  });
+</script>
+</body>
+</html>
