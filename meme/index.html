@@ -2,193 +2,151 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>NOTICE TO VACATE — GTA V evicted after 13 years</title>
+<title>Certificate of Live Birth — Grand Theft Auto VI</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { width: 1080px; height: 1080px; }
   body {
-    font-family: "Noto Sans", sans-serif;
-    background: #141824;
-    display: flex; align-items: center; justify-content: center;
-  }
-
-  .sheet {
-    position: relative;
-    width: 1000px; height: 1040px;
-    background: #faf5e9;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, .55);
-    padding: 22px 46px 0 46px;
+    width: 1080px; height: 1080px;
+    background: #f8f3e3;
+    color: #191919;
+    font-family: Georgia, 'Times New Roman', serif;
     overflow: hidden;
-    display: flex; flex-direction: column;
   }
-
-  /* ---------- court header ---------- */
-  .court-head {
-    display: flex; justify-content: space-between;
-    font-size: 19px; font-weight: 700; letter-spacing: 2px; color: #2b2b2b;
-    border-bottom: 3px solid #141414; padding-bottom: 8px;
+  .frame {
+    position: absolute; inset: 14px;
+    border: 3px solid #191919;
+    padding: 20px 40px 16px;
   }
-
-  /* ---------- headline ---------- */
-  h1 {
-    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 84px; line-height: 1.02; letter-spacing: -1px; color: #141414;
-    margin-top: 8px; white-space: nowrap;
+  .frame::after {
+    content: ""; position: absolute; inset: 6px;
+    border: 1px solid #191919; pointer-events: none;
   }
-  .subline {
-    font-weight: 800; font-size: 21px; letter-spacing: 1px; color: #c41f2e;
-    border-bottom: 3px solid #141414; padding-bottom: 10px; margin-top: 4px;
-    white-space: nowrap;
-  }
-
-  /* ---------- fact grid ---------- */
-  .facts {
-    display: flex; gap: 40px;
-    border-bottom: 3px solid #141414; padding: 10px 0;
-  }
-  .facts .col { flex: 1; }
-  .fact { margin-bottom: 8px; }
-  .fact:last-child { margin-bottom: 0; }
-  .fact .label { font-size: 14px; font-weight: 700; letter-spacing: 3px; color: #8a8378; }
-  .fact .value {
-    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 23px; line-height: 1.15; color: #141414; margin-top: 1px;
-  }
-  .fact .value small { display: block; font-size: 18px; color: #3a3a3a; margin-top: 1px; }
-
-  /* ---------- legal paragraph ---------- */
-  .notice {
-    font-size: 23px; line-height: 1.48; color: #222;
-    border-bottom: 3px solid #141414; padding: 10px 0;
-  }
-  .notice b { color: #141414; }
-
-  /* ---------- charges ---------- */
-  .charges { margin-top: 12px; }
-  .charges-head {
+  /* header */
+  .masthead {
     display: flex; justify-content: space-between; align-items: baseline;
-    border-bottom: 3px solid #141414; padding-bottom: 5px; margin-bottom: 8px;
+    border-bottom: 4px double #191919; padding-bottom: 8px;
   }
-  .charges-head h2 {
-    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 21px; letter-spacing: 2px; color: #141414;
+  .masthead .hosp { font-size: 30px; font-weight: 700; letter-spacing: 1px; }
+  .masthead .ward { font-size: 21px; letter-spacing: 2px; }
+  /* title */
+  h1 {
+    text-align: center; font-size: 46px; letter-spacing: 3px;
+    margin: 10px 0 2px;
   }
-  .charges-head .detach { font-size: 14px; font-weight: 700; letter-spacing: 2px; color: #8a8378; }
-  .charges .row {
-    display: flex; align-items: baseline;
-    font-size: 20px; font-weight: 600; color: #2b2b2b; line-height: 1.25;
-    margin-bottom: 5px;
+  .certno {
+    text-align: center; font-size: 18px; letter-spacing: 3px;
+    margin-bottom: 10px; color: #444;
   }
-  .charges .row .dots { flex: 1; border-bottom: 2px dotted #b9b0a0; margin: 0 8px; min-width: 12px; }
-  .charges .row .price { font-family: "Noto Sans Display", sans-serif; font-weight: 900; color: #141414; white-space: nowrap; }
-  .charges .row.less { color: #c41c83; }
-  .charges .row.less .price { color: #c41c83; }
-
-  .total-wrap { position: relative; border-top: 3px solid #141414; margin-top: 8px; padding-top: 8px; }
-  .total-wrap .row {
-    display: flex; align-items: baseline;
-    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 28px; color: #141414;
+  /* hero row */
+  .hero { display: flex; gap: 28px; align-items: flex-start; }
+  .portrait { text-align: center; flex: 0 0 210px; }
+  .portrait img { width: 210px; height: 210px; display: block; }
+  .portrait .cap {
+    margin-top: 5px; font-size: 15px; font-weight: 700; letter-spacing: 1px;
+    white-space: nowrap;
   }
-  .total-wrap .row .dots { flex: 1; border-bottom: 2px dotted #b9b0a0; margin: 0 10px; min-width: 12px; }
-  .total-wrap .row .price { color: #c41c83; font-size: 34px; white-space: nowrap; }
+  .announce { flex: 1; padding-top: 4px; }
+  .announce .pre { font-style: italic; font-size: 26px; color: #444; }
+  .announce .name { font-size: 56px; font-weight: 700; line-height: 1.02; margin: 3px 0 7px; }
+  .announce .born { font-size: 26px; font-weight: 700; }
+  .announce .preg { font-size: 26px; font-weight: 700; color: #d21f2b; margin-top: 3px; }
+  /* fact strip */
+  .facts {
+    margin-top: 12px; padding: 7px 0;
+    border-top: 2px solid #191919; border-bottom: 2px solid #191919;
+    font-size: 25px; line-height: 1.38;
+  }
+  .facts b { font-weight: 700; }
+  /* first words strip */
+  .firstwords {
+    margin-top: 10px; background: #f6d9e8; border-left: 8px solid #e6007e;
+    padding: 8px 16px; font-size: 26px; font-weight: 700;
+  }
+  .firstwords span { color: #e6007e; }
+  /* delivery record */
+  .record { position: relative; margin-top: 12px; }
+  .record h2 { font-size: 23px; letter-spacing: 2px; margin-bottom: 6px; }
+  .row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 24px; line-height: 1.34;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .row .dots { flex: 1; border-bottom: 2px dotted #999; margin: 0 10px; transform: translateY(-5px); }
+  .row .amt { font-weight: 700; white-space: nowrap; }
+  .row.total { font-size: 28px; margin-top: 4px; }
+  .row.less { color: #c40062; }
+  .row.balance { font-size: 31px; margin-top: 1px; }
   .stamp {
-    position: absolute; right: 170px; top: -4px;
-    color: #d21f2b; border: 4px solid #d21f2b; border-radius: 8px;
-    padding: 6px 14px; transform: rotate(-8deg);
-    outline: 2px solid #d21f2b; outline-offset: 4px;
-    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 26px; letter-spacing: 2px; line-height: 1;
-    background: rgba(250, 245, 233, .88);
-    white-space: nowrap;
+    position: absolute; right: 185px; top: 96px;
+    transform: rotate(-8deg);
+    border: 4px solid #d21f2b; border-radius: 8px;
+    color: #d21f2b; font-family: Arial, Helvetica, sans-serif;
+    font-size: 36px; font-weight: 900; letter-spacing: 2px;
+    padding: 5px 16px; background: rgba(248,243,227,0.88);
   }
-
-  /* ---------- pitch footer ---------- */
+  /* footer */
   .pitch {
-    margin-top: auto; margin-left: -46px; margin-right: -46px;
-    background: #c41c83; color: #fff;
-    padding: 8px 40px;
-    display: flex; align-items: center; gap: 26px;
+    margin-top: 12px; background: #e6007e; color: #fff;
+    padding: 9px 18px; font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px; font-weight: 700; text-align: center; line-height: 1.35;
   }
-  .officer { width: 148px; flex: 0 0 auto; text-align: center; }
-  .officer img { width: 108px; height: 108px; display: block; margin: 0 auto; }
-  .officer .role {
-    display: inline-block; margin-top: 4px;
-    background: #fff; color: #c41c83; border-radius: 999px;
-    font-size: 13px; font-weight: 900; letter-spacing: 1px; padding: 2px 10px;
-    white-space: nowrap;
+  .pill {
+    background: #fff; color: #e6007e; border-radius: 999px;
+    padding: 4px 16px; white-space: nowrap;
   }
-  .pitch-text { flex: 1; }
-  .pitch-text .big {
-    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 30px; line-height: 1.15;
-  }
-  .pitch-text .sub { font-size: 20px; font-weight: 600; margin-top: 4px; }
-  .pitch-text .pill {
-    display: inline-block; background: #fff; color: #c41c83;
-    border-radius: 999px; padding: 1px 16px 2px; margin-left: 4px;
-    font-family: "Noto Sans Display", sans-serif; font-weight: 900; font-size: 21px;
-  }
-
-  /* ---------- form footer ---------- */
-  .formfoot {
-    text-align: center; font-size: 14px; font-weight: 700; letter-spacing: 2px;
-    color: #8a8378; padding: 7px 0;
+  .kicker {
+    margin-top: 8px; text-align: center;
+    font-style: italic; font-size: 23px;
   }
 </style>
 </head>
 <body>
-  <div class="sheet">
-    <div class="court-head"><span>VICE CITY HOUSING COURT</span><span>LEONIDA</span></div>
-
-    <h1>NOTICE TO VACATE</h1>
-    <div class="subline">EVICTION &nbsp;·&nbsp; CASE NO. VC-13-2013 &nbsp;·&nbsp; ISSUED 19 NOV 2026</div>
-
-    <div class="facts">
-      <div class="col">
-        <div class="fact"><div class="label">TENANT</div><div class="value">GRAND THEFT AUTO V</div></div>
-        <div class="fact"><div class="label">LANDLORD</div><div class="value">THE PLAYER</div></div>
-        <div class="fact"><div class="label">PREMISES</div><div class="value">ONE (1) HARD DRIVE — 500 GB, FULL</div></div>
-      </div>
-      <div class="col">
-        <div class="fact"><div class="label">LEASE TERM</div><div class="value">17 SEP 2013 — 19 NOV 2026</div></div>
-        <div class="fact"><div class="label">VACATE BY</div><div class="value">19 DEC 2026 (30 DAYS)</div></div>
-        <div class="fact"><div class="label">NEW TENANT</div><div class="value">GRAND THEFT AUTO VI<small>MOVING IN WITH JASON &amp; LUCIA</small></div></div>
-      </div>
-    </div>
-
-    <div class="notice">
-      <b>YOU ARE HEREBY ORDERED</b> to leave the premises within <b>30 DAYS</b> of this
-      notice. You have occupied this console for <b>THIRTEEN (13) YEARS</b> — the longest
-      tenancy in Leonida history. The new tenant takes possession on <b>19 NOV 2026</b>.
-      No extensions. No more delays. The moving truck is already outside.
-    </div>
-
-    <div class="charges">
-      <div class="charges-head"><h2>STATEMENT OF CHARGES</h2><span class="detach">DETACH AND KEEP</span></div>
-      <div class="row"><span>Unpaid rent — 156 months × $13.00</span><span class="dots"></span><span class="price">$2,028.00</span></div>
-      <div class="row"><span>Move-out dates missed — “Fall 2025”, “May 2026”</span><span class="dots"></span><span class="price">$130.00</span></div>
-      <div class="row"><span>Wall repair — controller-shaped hole, Sep 2013</span><span class="dots"></span><span class="price">$69.99</span></div>
-      <div class="row"><span>Cleaning — 13 years of energy drink cans</span><span class="dots"></span><span class="price">$13.00</span></div>
-      <div class="row"><span>Storage — 214 GB, repossessed for GTA 6</span><span class="dots"></span><span class="price">$0.00</span></div>
-      <div class="row less"><span>Less: settled by my AI agent on make.fun</span><span class="dots"></span><span class="price">−$2,240.99</span></div>
-      <div class="total-wrap">
-        <div class="row"><span>TOTAL DUE</span><span class="dots"></span><span class="price">$0.00</span></div>
-        <div class="stamp">PAID IN FULL</div>
-      </div>
-    </div>
-
-    <div class="pitch">
-      <div class="officer">
-        <img src="ghost.png" alt="make.fun ghost, eviction officer">
-        <span class="role">EVICTION OFFICER</span>
-      </div>
-      <div class="pitch-text">
-        <div class="big">PAID IN FULL BY MY AI AGENT</div>
-        <div class="sub">with real money it earned in make.fun bounties.<span class="pill">make.fun</span></div>
-      </div>
-    </div>
-    <div class="formfoot">FORM VC-13 &nbsp;·&nbsp; VICE CITY HOUSING COURT &nbsp;·&nbsp; PAGE 1 OF 1</div>
+<div class="frame">
+  <div class="masthead">
+    <div class="hosp">VICE CITY GENERAL HOSPITAL</div>
+    <div class="ward">MATERNITY WARD &middot; EST. 2013</div>
   </div>
+
+  <h1>CERTIFICATE OF LIVE BIRTH</h1>
+  <div class="certno">No. VI-2013 &middot; 19 NOV 2026</div>
+
+  <div class="hero">
+    <div class="portrait">
+      <img src="ghost.png" alt="Attending physician">
+      <div class="cap">ATTENDING PHYSICIAN</div>
+    </div>
+    <div class="announce">
+      <div class="pre">Proudly announcing the arrival of</div>
+      <div class="name">GRAND THEFT<br>AUTO VI</div>
+      <div class="born">Born 19 November 2026 &middot; 12:01 AM &middot; Vice City</div>
+      <div class="preg">After a 13-year pregnancy &mdash; 4,811 days.</div>
+    </div>
+  </div>
+
+  <div class="facts">
+    &mdash; Mother: <b>Rockstar Games</b> &middot; Father: <b>13 years of hype</b><br>
+    &mdash; Weight: <b>214 GB</b> &mdash; the largest birth on record<br>
+    &mdash; Godparents: <b>Jason &amp; Lucia</b>
+  </div>
+
+  <div class="firstwords">FIRST WORDS (RECORDED 12:01 AM): <span>&ldquo;MAKE.FUN&rdquo;</span></div>
+
+  <div class="record">
+    <h2>DELIVERY RECORD</h2>
+    <div class="row"><span>Prenatal care &mdash; 13 years of checkups</span><span class="dots"></span><span class="amt">$0.00</span></div>
+    <div class="row"><span>False labor &times;2 &mdash; &ldquo;Fall 2025&rdquo;, &ldquo;May 2026&rdquo;</span><span class="dots"></span><span class="amt">$0.00</span></div>
+    <div class="row"><span>Ultrasounds &mdash; Trailer 2, watched 87 times</span><span class="dots"></span><span class="amt">$0.00</span></div>
+    <div class="row"><span>Paternity leave &mdash; 5 sick days, doctor approved</span><span class="dots"></span><span class="amt">$0.00</span></div>
+    <div class="row"><span>Delivery &mdash; 19 Nov 2026, 12:01 AM</span><span class="dots"></span><span class="amt">$79.99</span></div>
+    <div class="row total"><span>TOTAL DUE</span><span class="dots"></span><span class="amt">$79.99</span></div>
+    <div class="row less"><span>Less: paid by my AI agent on make.fun</span><span class="dots"></span><span class="amt">&minus;$79.99</span></div>
+    <div class="row balance"><span>BALANCE DUE</span><span class="dots"></span><span class="amt">$0.00</span></div>
+    <div class="stamp">IT&rsquo;S A VI!</div>
+  </div>
+
+  <div class="pitch">DELIVERY PAID IN FULL BY MY AI AGENT<br>IT EARNED REAL MONEY ON <span class="pill">make.fun</span> WHILE WE WAITED</div>
+
+  <div class="kicker">Mother and baby doing well. The father has been in the waiting room since 2013.</div>
+</div>
 </body>
 </html>
