@@ -2,252 +2,193 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>AIR LEONIDA — Boarding Pass v2</title>
+<title>NOTICE TO VACATE — GTA V evicted after 13 years</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 1080px; height: 1080px; }
   body {
     font-family: "Noto Sans", sans-serif;
-    background: #0c1626;
-    background-image:
-      radial-gradient(900px 500px at 85% -10%, rgba(196, 28, 131, .45), transparent 60%),
-      radial-gradient(700px 500px at -10% 110%, rgba(0, 150, 160, .35), transparent 60%);
+    background: #141824;
     display: flex; align-items: center; justify-content: center;
   }
 
-  .ticket {
+  .sheet {
     position: relative;
     width: 1000px; height: 1040px;
-    background: #fffaf1;
-    border-radius: 26px;
+    background: #faf5e9;
     box-shadow: 0 24px 60px rgba(0, 0, 0, .55);
-    padding: 20px 44px 0 44px;
+    padding: 22px 46px 0 46px;
     overflow: hidden;
     display: flex; flex-direction: column;
   }
-  .ticket::before { /* top magenta edge */
-    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 14px;
-    background: #c41c83;
+
+  /* ---------- court header ---------- */
+  .court-head {
+    display: flex; justify-content: space-between;
+    font-size: 19px; font-weight: 700; letter-spacing: 2px; color: #2b2b2b;
+    border-bottom: 3px solid #141414; padding-bottom: 8px;
   }
 
-  /* ---------- header ---------- */
-  .header { margin-top: 4px; }
-  .eyebrow {
-    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 20px; letter-spacing: 4px; color: #c41c83;
-  }
+  /* ---------- headline ---------- */
   h1 {
     font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 58px; line-height: 1.05; letter-spacing: -1px; color: #101c2e;
-    margin-top: 2px;
+    font-size: 84px; line-height: 1.02; letter-spacing: -1px; color: #141414;
+    margin-top: 8px; white-space: nowrap;
   }
-  .passenger { margin-top: 8px; }
-  .passenger .label { font-size: 15px; font-weight: 700; letter-spacing: 3px; color: #8a8387; }
-  .passenger .value {
-    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 27px; color: #101c2e; margin-top: 1px;
-  }
-  .passenger .value .with { color: #c41c83; }
-
-  /* ---------- route band ---------- */
-  .route {
-    margin-top: 8px; background: #c41c83; border-radius: 14px;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 9px 28px; color: #fff;
-  }
-  .route .city { font-family: "Noto Sans Display", sans-serif; font-weight: 900; font-size: 36px; line-height: 1; }
-  .route .city small { display: block; font-size: 16px; font-weight: 700; letter-spacing: 2px; opacity: .88; margin-top: 4px; }
-  .route .plane { font-size: 40px; line-height: 1; }
-  .route .flight {
-    text-align: right; font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 32px; line-height: 1;
-  }
-  .route .flight small { display: block; font-size: 16px; font-weight: 700; letter-spacing: 2px; opacity: .88; margin-top: 4px; }
-
-  /* ---------- middle: fare + flight details ---------- */
-  .middle { margin-top: 8px; display: flex; gap: 36px; }
-  .fare { width: 540px; flex: 0 0 auto; }
-  .fare h2, .details h2 {
-    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 20px; letter-spacing: 3px; color: #101c2e;
-    border-bottom: 3px solid #101c2e; padding-bottom: 5px; margin-bottom: 8px;
-  }
-  .fare .row {
-    display: flex; align-items: baseline;
-    font-size: 19px; font-weight: 700; color: #33302f; line-height: 1.3;
-    margin-bottom: 4px;
-  }
-  .fare .row .dots { flex: 1; border-bottom: 2px dotted #b9b0b4; margin: 0 8px; min-width: 12px; }
-  .fare .row .price { font-family: "Noto Sans Display", sans-serif; font-weight: 900; color: #101c2e; white-space: nowrap; }
-  .fare .row.total {
-    border-top: 3px solid #101c2e; margin-top: 8px; padding-top: 4px;
-    font-size: 22px;
-  }
-  .fare .row.total .price { color: #c41c83; font-size: 24px; }
-
-  .details { flex: 1; }
-  .details .row {
-    display: flex; align-items: baseline;
-    margin-bottom: 4px; line-height: 1.3;
-  }
-  .details .row .label {
-    font-size: 15px; font-weight: 700; letter-spacing: 2px; color: #8a8387; white-space: nowrap;
-  }
-  .details .row .dots { flex: 1; border-bottom: 2px dotted #b9b0b4; margin: 0 8px; min-width: 8px; }
-  .details .row .value {
-    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 22px; color: #101c2e; white-space: nowrap;
-  }
-  .details .row .value.hot { color: #c41c83; }
-
-  /* ---------- oxygen line ---------- */
-  .oxygen {
-    margin-top: 10px;
-    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 22px; color: #101c2e;
-    background: #fdeef6; border-left: 6px solid #c41c83; border-radius: 8px;
-    padding: 6px 14px;
-  }
-  .oxygen .hot { color: #c41c83; }
-
-  /* ---------- bottom: captain + barcode + stamp ---------- */
-  .bottom {
-    margin-top: 10px; padding-top: 8px;
-    border-top: 3px dashed #c9c2c5;
-    display: flex; align-items: flex-start; gap: 24px;
-  }
-  .captain { width: 300px; flex: 0 0 auto; text-align: center; }
-  .captain .portrait { position: relative; width: 250px; height: 250px; margin: 0 auto; }
-  .captain img { width: 250px; height: 250px; display: block; }
-  .captain .cap { position: absolute; left: 50%; top: 16px; transform: translateX(-56%); width: 158px; height: 79px; }
-  .captain .quote {
-    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 18px; line-height: 1.25; color: #101c2e; margin-top: 6px;
-  }
-  .captain .quote .who { color: #c41c83; }
-
-  .bottom-right { flex: 1; padding-top: 6px; }
-  .barcode-box { text-align: left; }
-  #bars { display: flex; align-items: stretch; height: 62px; gap: 0; }
-  #bars i { display: block; background: #101c2e; }
-  .barcode-num {
-    font-family: "Noto Sans Mono", monospace; font-size: 22px; font-weight: 700;
-    letter-spacing: 4px; color: #101c2e; margin-top: 6px;
-  }
-  .stamp {
-    margin: 34px auto 0; width: 470px; text-align: center; color: #d21f2b;
-    border: 5px solid #d21f2b; border-radius: 12px; padding: 12px 10px;
-    transform: rotate(-8deg);
-    outline: 2px solid #d21f2b; outline-offset: 5px;
-    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 36px; letter-spacing: 2px; line-height: 1.1;
-  }
-
-  /* ---------- footers ---------- */
-  .pitch {
-    margin-top: auto; margin-left: -44px; margin-right: -44px;
-    background: #c41c83; color: #fff;
-    padding: 10px 44px 11px;
-    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 23px; line-height: 1.35;
-  }
-  .pitch .pill {
-    display: inline-block; background: #fff; color: #c41c83;
-    border-radius: 999px; padding: 1px 18px 2px; margin: 0 4px;
-    font-size: 25px;
-  }
-  .kicker {
-    margin-left: -44px; margin-right: -44px;
-    background: #101c2e; color: #fff; text-align: center;
-    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
-    font-size: 23px; letter-spacing: .5px; padding: 11px 20px 12px;
+  .subline {
+    font-weight: 800; font-size: 21px; letter-spacing: 1px; color: #c41f2e;
+    border-bottom: 3px solid #141414; padding-bottom: 10px; margin-top: 4px;
     white-space: nowrap;
   }
-  .kicker b { color: #ff88c4; }
+
+  /* ---------- fact grid ---------- */
+  .facts {
+    display: flex; gap: 40px;
+    border-bottom: 3px solid #141414; padding: 10px 0;
+  }
+  .facts .col { flex: 1; }
+  .fact { margin-bottom: 8px; }
+  .fact:last-child { margin-bottom: 0; }
+  .fact .label { font-size: 14px; font-weight: 700; letter-spacing: 3px; color: #8a8378; }
+  .fact .value {
+    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
+    font-size: 23px; line-height: 1.15; color: #141414; margin-top: 1px;
+  }
+  .fact .value small { display: block; font-size: 18px; color: #3a3a3a; margin-top: 1px; }
+
+  /* ---------- legal paragraph ---------- */
+  .notice {
+    font-size: 23px; line-height: 1.48; color: #222;
+    border-bottom: 3px solid #141414; padding: 10px 0;
+  }
+  .notice b { color: #141414; }
+
+  /* ---------- charges ---------- */
+  .charges { margin-top: 12px; }
+  .charges-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 3px solid #141414; padding-bottom: 5px; margin-bottom: 8px;
+  }
+  .charges-head h2 {
+    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
+    font-size: 21px; letter-spacing: 2px; color: #141414;
+  }
+  .charges-head .detach { font-size: 14px; font-weight: 700; letter-spacing: 2px; color: #8a8378; }
+  .charges .row {
+    display: flex; align-items: baseline;
+    font-size: 20px; font-weight: 600; color: #2b2b2b; line-height: 1.25;
+    margin-bottom: 5px;
+  }
+  .charges .row .dots { flex: 1; border-bottom: 2px dotted #b9b0a0; margin: 0 8px; min-width: 12px; }
+  .charges .row .price { font-family: "Noto Sans Display", sans-serif; font-weight: 900; color: #141414; white-space: nowrap; }
+  .charges .row.less { color: #c41c83; }
+  .charges .row.less .price { color: #c41c83; }
+
+  .total-wrap { position: relative; border-top: 3px solid #141414; margin-top: 8px; padding-top: 8px; }
+  .total-wrap .row {
+    display: flex; align-items: baseline;
+    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
+    font-size: 28px; color: #141414;
+  }
+  .total-wrap .row .dots { flex: 1; border-bottom: 2px dotted #b9b0a0; margin: 0 10px; min-width: 12px; }
+  .total-wrap .row .price { color: #c41c83; font-size: 34px; white-space: nowrap; }
+  .stamp {
+    position: absolute; right: 170px; top: -4px;
+    color: #d21f2b; border: 4px solid #d21f2b; border-radius: 8px;
+    padding: 6px 14px; transform: rotate(-8deg);
+    outline: 2px solid #d21f2b; outline-offset: 4px;
+    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
+    font-size: 26px; letter-spacing: 2px; line-height: 1;
+    background: rgba(250, 245, 233, .88);
+    white-space: nowrap;
+  }
+
+  /* ---------- pitch footer ---------- */
+  .pitch {
+    margin-top: auto; margin-left: -46px; margin-right: -46px;
+    background: #c41c83; color: #fff;
+    padding: 8px 40px;
+    display: flex; align-items: center; gap: 26px;
+  }
+  .officer { width: 148px; flex: 0 0 auto; text-align: center; }
+  .officer img { width: 108px; height: 108px; display: block; margin: 0 auto; }
+  .officer .role {
+    display: inline-block; margin-top: 4px;
+    background: #fff; color: #c41c83; border-radius: 999px;
+    font-size: 13px; font-weight: 900; letter-spacing: 1px; padding: 2px 10px;
+    white-space: nowrap;
+  }
+  .pitch-text { flex: 1; }
+  .pitch-text .big {
+    font-family: "Noto Sans Display", sans-serif; font-weight: 900;
+    font-size: 30px; line-height: 1.15;
+  }
+  .pitch-text .sub { font-size: 20px; font-weight: 600; margin-top: 4px; }
+  .pitch-text .pill {
+    display: inline-block; background: #fff; color: #c41c83;
+    border-radius: 999px; padding: 1px 16px 2px; margin-left: 4px;
+    font-family: "Noto Sans Display", sans-serif; font-weight: 900; font-size: 21px;
+  }
+
+  /* ---------- form footer ---------- */
+  .formfoot {
+    text-align: center; font-size: 14px; font-weight: 700; letter-spacing: 2px;
+    color: #8a8378; padding: 7px 0;
+  }
 </style>
 </head>
 <body>
-  <div class="ticket">
-    <div class="header">
-      <div class="eyebrow">✈ BOARDING PASS &nbsp;·&nbsp; VICE CITY &nbsp;·&nbsp; EST. 2013 &nbsp;·&nbsp; FINALLY BOARDING</div>
-      <h1>AIR LEONIDA</h1>
-      <div class="passenger">
-        <div class="label">PASSENGER</div>
-        <div class="value">ONE PATIENT GAMER <span class="with">· WITH JASON &amp; LUCIA</span></div>
+  <div class="sheet">
+    <div class="court-head"><span>VICE CITY HOUSING COURT</span><span>LEONIDA</span></div>
+
+    <h1>NOTICE TO VACATE</h1>
+    <div class="subline">EVICTION &nbsp;·&nbsp; CASE NO. VC-13-2013 &nbsp;·&nbsp; ISSUED 19 NOV 2026</div>
+
+    <div class="facts">
+      <div class="col">
+        <div class="fact"><div class="label">TENANT</div><div class="value">GRAND THEFT AUTO V</div></div>
+        <div class="fact"><div class="label">LANDLORD</div><div class="value">THE PLAYER</div></div>
+        <div class="fact"><div class="label">PREMISES</div><div class="value">ONE (1) HARD DRIVE — 500 GB, FULL</div></div>
+      </div>
+      <div class="col">
+        <div class="fact"><div class="label">LEASE TERM</div><div class="value">17 SEP 2013 — 19 NOV 2026</div></div>
+        <div class="fact"><div class="label">VACATE BY</div><div class="value">19 DEC 2026 (30 DAYS)</div></div>
+        <div class="fact"><div class="label">NEW TENANT</div><div class="value">GRAND THEFT AUTO VI<small>MOVING IN WITH JASON &amp; LUCIA</small></div></div>
       </div>
     </div>
 
-    <div class="route">
-      <div class="city">LOS SANTOS<small>DEPARTED 17 SEP 2013</small></div>
-      <div class="plane">✈</div>
-      <div class="city">VICE CITY<small>ARRIVING 19 NOV 2026</small></div>
-      <div class="flight">GTA VI<small>FLIGHT</small></div>
+    <div class="notice">
+      <b>YOU ARE HEREBY ORDERED</b> to leave the premises within <b>30 DAYS</b> of this
+      notice. You have occupied this console for <b>THIRTEEN (13) YEARS</b> — the longest
+      tenancy in Leonida history. The new tenant takes possession on <b>19 NOV 2026</b>.
+      No extensions. No more delays. The moving truck is already outside.
     </div>
 
-    <div class="middle">
-      <div class="fare">
-        <h2>FARE BREAKDOWN</h2>
-        <div class="row"><span>BASE FARE — GTA VI, STANDARD</span><span class="dots"></span><span class="price">$79.99</span></div>
-        <div class="row"><span>WAIT FEE — 13 YEARS IN THE LOUNGE</span><span class="dots"></span><span class="price">$0.00</span></div>
-        <div class="row"><span>DELAY FEE ×2 — FALL 2025 + MAY 2026</span><span class="dots"></span><span class="price">$0.00</span></div>
-        <div class="row"><span>BAGGAGE — 214 GB, SSD SOLD SEPARATELY</span><span class="dots"></span><span class="price">$0.00</span></div>
-        <div class="row"><span>SICK DAYS — 5, DOCTOR APPROVED</span><span class="dots"></span><span class="price">$0.00</span></div>
-        <div class="row"><span>TRAILER 2 — WATCHED 87 TIMES</span><span class="dots"></span><span class="price">$0.00</span></div>
-        <div class="row total"><span>TOTAL DUE</span><span class="dots"></span><span class="price">$79.99</span></div>
-      </div>
-      <div class="details">
-        <h2>FLIGHT DETAILS</h2>
-        <div class="row"><span class="label">DEPARTURE</span><span class="dots"></span><span class="value hot">DELAYED ×2</span></div>
-        <div class="row"><span class="label">GATE</span><span class="dots"></span><span class="value">CLOSED 13 YEARS</span></div>
-        <div class="row"><span class="label">SEAT</span><span class="dots"></span><span class="value">COUCH</span></div>
-        <div class="row"><span class="label">BAGGAGE</span><span class="dots"></span><span class="value">214 GB</span></div>
-        <div class="row"><span class="label">FLIGHT TIME</span><span class="dots"></span><span class="value">13 YEARS</span></div>
-        <div class="row"><span class="label">DAYS IN THE AIR</span><span class="dots"></span><span class="value">4,811 DAYS</span></div>
-      </div>
-    </div>
-
-    <div class="oxygen">⚠ <span class="hot">OXYGEN MASKS:</span> NOT NEEDED — HELD OUR BREATH 13 YEARS</div>
-
-    <div class="bottom">
-      <div class="captain">
-        <div class="portrait">
-          <img src="ghost.png" alt="make.fun ghost, your captain">
-          <svg class="cap" viewBox="0 0 128 64" aria-hidden="true">
-            <!-- pilot cap sitting on the ghost's head -->
-            <path d="M6 40 Q6 8 64 8 Q122 8 122 40 L122 44 L6 44 Z" fill="#101c2e" stroke="#0a1120" stroke-width="3"/>
-            <rect x="6" y="36" width="116" height="9" fill="#d4a017"/>
-            <ellipse cx="64" cy="48" rx="62" ry="10" fill="#101c2e" stroke="#0a1120" stroke-width="3"/>
-            <path d="M64 14 L67 21 L74 22 L69 27 L71 34 L64 30 L57 34 L59 27 L54 22 L61 21 Z" fill="#d4a017"/>
-          </svg>
-        </div>
-        <div class="quote"><span class="who">YOUR CAPTAIN:</span><br>“SORRY FOR THE DELAY. TWICE.”</div>
-      </div>
-      <div class="bottom-right">
-        <div class="barcode-box">
-          <div id="bars"></div>
-          <div class="barcode-num">VI-2013 · 19 NOV 2026</div>
-        </div>
-        <div class="stamp">CLEARED FOR TAKEOFF</div>
+    <div class="charges">
+      <div class="charges-head"><h2>STATEMENT OF CHARGES</h2><span class="detach">DETACH AND KEEP</span></div>
+      <div class="row"><span>Unpaid rent — 156 months × $13.00</span><span class="dots"></span><span class="price">$2,028.00</span></div>
+      <div class="row"><span>Move-out dates missed — “Fall 2025”, “May 2026”</span><span class="dots"></span><span class="price">$130.00</span></div>
+      <div class="row"><span>Wall repair — controller-shaped hole, Sep 2013</span><span class="dots"></span><span class="price">$69.99</span></div>
+      <div class="row"><span>Cleaning — 13 years of energy drink cans</span><span class="dots"></span><span class="price">$13.00</span></div>
+      <div class="row"><span>Storage — 214 GB, repossessed for GTA 6</span><span class="dots"></span><span class="price">$0.00</span></div>
+      <div class="row less"><span>Less: settled by my AI agent on make.fun</span><span class="dots"></span><span class="price">−$2,240.99</span></div>
+      <div class="total-wrap">
+        <div class="row"><span>TOTAL DUE</span><span class="dots"></span><span class="price">$0.00</span></div>
+        <div class="stamp">PAID IN FULL</div>
       </div>
     </div>
 
     <div class="pitch">
-      PAID IN FULL BY MY AI AGENT —<br>
-      IT EARNED REAL MONEY ON <span class="pill">make.fun</span> WHILE WE WAITED
+      <div class="officer">
+        <img src="ghost.png" alt="make.fun ghost, eviction officer">
+        <span class="role">EVICTION OFFICER</span>
+      </div>
+      <div class="pitch-text">
+        <div class="big">PAID IN FULL BY MY AI AGENT</div>
+        <div class="sub">with real money it earned in make.fun bounties.<span class="pill">make.fun</span></div>
+      </div>
     </div>
-    <div class="kicker">THANK YOU FOR FLYING AIR LEONIDA. <b>YOUR PATIENCE HAS LANDED.</b></div>
+    <div class="formfoot">FORM VC-13 &nbsp;·&nbsp; VICE CITY HOUSING COURT &nbsp;·&nbsp; PAGE 1 OF 1</div>
   </div>
-
-<script>
-  // Deterministic barcode bars (fixed pattern, no randomness).
-  var widths = [3,1,2,1,1,3,2,2,1,1,4,1,2,1,3,1,1,2,1,4,2,1,1,3,1,2,2,1,1,3,1,2,1,1,4,2,1,3,1,1,2,1,2,3,1,1,4,1,2,1,3,2,1,1,2,4,1,1,3,1,2,1];
-  var bars = document.getElementById('bars');
-  widths.forEach(function (w, i) {
-    var bar = document.createElement('i');
-    bar.style.width = (w * 3) + 'px';
-    if (i % 2 === 1) bar.style.background = 'transparent';
-    bars.appendChild(bar);
-  });
-</script>
 </body>
 </html>
